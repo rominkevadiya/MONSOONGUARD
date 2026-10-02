@@ -74,30 +74,30 @@ The prototype includes automated test suites to validate logic and integration.
 
 ```mermaid
 flowchart TD
-    subgraph Phase 1: SIH Prototype
+    subgraph P1 [Phase 1: SIH Prototype]
         A[Deterministic Risk Engine]
         B[Dual Dashboards]
         C[Synthetic ML Pipeline]
     end
     
-    subgraph Phase 2: Data Integration
+    subgraph P2 [Phase 2: Data Integration]
         D[IMD/AWS Telemetry Ingestion]
         E[Historical Dataset Compilation]
         F[Geospatial Mapping Expansion]
     end
     
-    subgraph Phase 3: ML Maturation
+    subgraph P3 [Phase 3: ML Maturation]
         G[Model Training on Real Data]
         H[Scientific Validation & Calibration]
         I[Deployment of ML Inference Service]
     end
     
-    subgraph Phase 4: Production Rollout
+    subgraph P4 [Phase 4: Production Rollout]
         J[SMS/WhatsApp Advisory Dispatch]
         K[State-Wide Officer Deployment]
     end
     
-    Phase 1 --> Phase 2
-    Phase 2 --> Phase 3
-    Phase 3 --> Phase 4
+    P1 --> P2
+    P2 --> P3
+    P3 --> P4
 ```

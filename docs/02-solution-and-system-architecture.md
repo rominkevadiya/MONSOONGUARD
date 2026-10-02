@@ -111,9 +111,9 @@ The frontend utilizes a lightweight, custom React Context provider to handle tra
 ```mermaid
 flowchart LR
     A[LanguageContext] -->|Loads on mount| B[localStorage]
-    B -->|'monsoonguard-language'| A
+    B -->|monsoonguard-language| A
     
-    A -->|Provides t() function| C[UI Components]
+    A -->|Provides t function| C[UI Components]
     
     subgraph Dictionaries
         EN[en.ts]
@@ -125,8 +125,8 @@ flowchart LR
     GU --> A
     HI --> A
     
-    C -->|User selects 'ગુજરાતી'| A
-    A -->|Updates State & Cache| B
+    C -->|User selects Gujarati| A
+    A -->|Updates State and Cache| B
 ```
 
 ## 6. Core Risk-Processing Flow
