@@ -1,0 +1,28 @@
+{
+  "model": "XGBoost",
+  "version": "prototype-1",
+  "features": [
+    "rainfall_mm",
+    "nino34",
+    "dmi",
+    "mjo_phase",
+    "mjo_amplitude",
+    "day_of_year",
+    "days_since_monsoon_reference",
+    "rainfall_lag_1",
+    "rainfall_lag_3",
+    "rainfall_lag_7",
+    "rainfall_lag_14",
+    "rainfall_7d_cum",
+    "rainfall_30d_cum",
+    "consecutive_dry_days",
+    "rainfall_30d_mean",
+    "rainfall_anomaly"
+  ],
+  "training_period": "2021-01-01 00:00:00 to 2022-10-20 00:00:00",
+  "validation_period": "2022-10-21 00:00:00 to 2023-05-27 00:00:00",
+  "test_period": "2023-05-28 00:00:00 to 2023-12-31 00:00:00",
+  "calibrated": true,
+  "dataset_type": "synthetic",
+  "generated_at": "2026-10-02T15:35:08.759658"
+}
