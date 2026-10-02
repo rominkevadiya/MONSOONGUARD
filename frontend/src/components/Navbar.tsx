@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CloudRain, Bell, User, MapPin } from 'lucide-react';
+import { CloudRain, Bell, User, MapPin, Globe } from 'lucide-react';
 import { useDemo } from '../context/DemoContext';
+import { useLanguage } from '../i18n';
+import type { Language } from '../i18n';
 
 export const Navbar: React.FC = () => {
   const { isDemoMode, setIsDemoMode, apiAvailable, scenarios, activeScenario, setActiveScenario, location } = useDemo();
+  const { language, setLanguage, t } = useLanguage();
 
   return (
     <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
@@ -13,7 +16,7 @@ export const Navbar: React.FC = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center gap-2">
               <CloudRain className="h-8 w-8 text-brand-600" />
-              <span className="font-bold text-xl text-slate-900 tracking-tight">MonsoonGuard</span>
+              <span className="font-bold text-xl text-slate-900 tracking-tight">{t('landing.title')}</span>
             </Link>
             
             <div className="ml-6 flex items-center gap-2">
@@ -28,14 +31,14 @@ export const Navbar: React.FC = () => {
               
               {isDemoMode && (
                 <div className="flex items-center bg-amber-100 px-3 py-1 rounded-full border border-amber-200">
-                  <span className="text-xs font-bold text-amber-800 uppercase mr-2">Demo Mode</span>
+                  <span className="text-xs font-bold text-amber-800 uppercase mr-2 hidden md:inline">Demo Mode</span>
                   <select 
                     className="text-xs bg-transparent text-amber-900 font-medium outline-none cursor-pointer"
                     value={activeScenario.id}
                     onChange={(e) => setActiveScenario(scenarios.find(s => s.id === e.target.value) || scenarios[0])}
                   >
                     {scenarios.map(s => (
-                      <option key={s.id} value={s.id}>{s.name}</option>
+                      <option key={s.id} value={s.id}>{t(`demo.${s.id}`)}</option>
                     ))}
                   </select>
                 </div>
@@ -43,7 +46,20 @@ export const Navbar: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 md:gap-4">
+            <div className="flex items-center bg-slate-100 px-3 py-1.5 rounded-md border border-slate-200">
+              <Globe className="h-4 w-4 text-slate-500 mr-2" />
+              <select 
+                className="text-sm bg-transparent text-slate-700 font-medium outline-none cursor-pointer"
+                value={language}
+                onChange={(e) => setLanguage(e.target.value as Language)}
+              >
+                <option value="en">English</option>
+                <option value="gu">ગુજરાતી</option>
+                <option value="hi">हिन्दी</option>
+              </select>
+            </div>
+
             <div className="hidden md:flex items-center gap-1 text-sm text-slate-600 bg-slate-50 px-3 py-1.5 rounded-md border border-slate-200">
               <MapPin className="h-4 w-4" />
               <span>{location.name}, {location.block}</span>

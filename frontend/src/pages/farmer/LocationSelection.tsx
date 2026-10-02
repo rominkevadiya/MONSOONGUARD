@@ -3,9 +3,11 @@ import { useDemo } from '../../context/DemoContext';
 import { demoLocations } from '../../data/demoData';
 import { useNavigate } from 'react-router-dom';
 import { MapPin, Search } from 'lucide-react';
+import { useLanguage } from '../../i18n';
 
 export const LocationSelection: React.FC = () => {
   const { location, setLocation } = useDemo();
+  const { t } = useLanguage();
   const navigate = useNavigate();
 
   const handleSelect = (locId: string) => {
@@ -19,8 +21,8 @@ export const LocationSelection: React.FC = () => {
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Select Location</h1>
-        <p className="text-slate-500">Choose your farm's location for hyperlocal insights.</p>
+        <h1 className="text-2xl font-bold text-slate-900">{t('common.selectLocation')}</h1>
+        <p className="text-slate-500">{t('sowing.decisionSupport')}</p>
       </div>
 
       <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">

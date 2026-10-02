@@ -3,9 +3,11 @@ import { useDemo } from '../../context/DemoContext';
 import { RiskCard } from '../../components/RiskCard';
 import { CloudRain, Droplets, CloudLightning, Sprout, ArrowRight, AlertOctagon } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../../i18n';
 
 export const FarmerDashboard: React.FC = () => {
   const { activeScenario, location } = useDemo();
+  const { t } = useLanguage();
   const data = activeScenario.data;
 
   // Determine styles for main status based on false onset
@@ -18,35 +20,35 @@ export const FarmerDashboard: React.FC = () => {
       {/* Header section */}
       <div className="flex justify-between items-end mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Farm Overview</h1>
+          <h1 className="text-2xl font-bold text-slate-900">{t('navigation.dashboard')}</h1>
           <p className="text-slate-500">{location.name}, {location.block}</p>
         </div>
         <Link to="/farmer/location" className="text-sm font-medium text-brand-600 hover:text-brand-700">
-          Change Location
+          {t('common.selectLocation')}
         </Link>
       </div>
 
       {/* Main Status */}
       <div className={`p-6 rounded-2xl border shadow-sm ${statusBg}`}>
-        <h2 className="text-sm font-bold uppercase tracking-wider mb-4 opacity-80">Monsoon Status</h2>
+        <h2 className="text-sm font-bold uppercase tracking-wider mb-4 opacity-80">{t('dashboard.monsoonStatus')}</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div>
             <div className="text-4xl font-extrabold mb-1">{data.onsetProb}%</div>
-            <div className="text-sm font-medium opacity-80">Onset Probability</div>
+            <div className="text-sm font-medium opacity-80">{t('risk.onsetProbability')}</div>
           </div>
           <div>
             <div className="text-4xl font-extrabold mb-1">{data.persistenceProb}%</div>
-            <div className="text-sm font-medium opacity-80">Persistence Probability</div>
+            <div className="text-sm font-medium opacity-80">{t('risk.persistenceProbability')}</div>
           </div>
         </div>
 
         <div className="flex gap-4 mb-6">
           <div className="text-sm bg-slate-100 text-slate-700 px-3 py-1 rounded-full font-medium">
-            Confidence: <span className="font-bold">{data.sowingRisk === 'HIGH' ? 'High' : 'Medium'}</span>
+            {t('common.confidence')}: <span className="font-bold">{data.sowingRisk === 'HIGH' ? t('risk.high') : t('risk.medium')}</span>
           </div>
           <div className="text-sm bg-slate-100 text-slate-700 px-3 py-1 rounded-full font-medium">
-            Forecast Horizon: <span className="font-bold">7 days</span>
+            {t('risk.forecastHorizon')}: <span className="font-bold">7 days</span>
           </div>
         </div>
 
@@ -54,14 +56,14 @@ export const FarmerDashboard: React.FC = () => {
           <div className={`p-4 rounded-lg bg-red-100 ${statusText} flex items-start gap-3`}>
             <AlertOctagon className="h-6 w-6 shrink-0" />
             <div>
-              <p className="font-bold">False-Onset Warning</p>
-              <p className="text-sm mt-1">{data.falseOnsetReason}</p>
+              <p className="font-bold">{t('risk.falseOnsetDetected')}</p>
+              <p className="text-sm mt-1">{t('sowing.falseOnsetReason')}</p>
             </div>
           </div>
         ) : (
           <div className={`p-4 rounded-lg bg-white/60 ${statusText}`}>
             <p className="font-medium">
-              Onset-like rainfall detected — persistence still being evaluated.
+              {t('sowing.monsoonOnsetLike')} {t('sowing.notYetConfirmed')} {t('sowing.sowingRecommendation')}
             </p>
           </div>
         )}
@@ -70,29 +72,29 @@ export const FarmerDashboard: React.FC = () => {
       {/* Risk Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <RiskCard 
-          title="Onset" 
+          title={t('sowing.initialRain')} 
           value={data.onsetProb} 
           isPercentage 
           level={data.onsetProb > 70 ? 'LOW' : 'HIGH'} 
           icon={CloudRain} 
         />
         <RiskCard 
-          title="Dry-Break" 
+          title={t('risk.dryBreakRisk')} 
           value={data.drySpell7Prob} 
           isPercentage 
           level={data.drySpell7Prob > 50 ? 'HIGH' : data.drySpell7Prob > 30 ? 'MEDIUM' : 'LOW'} 
           icon={Droplets} 
         />
         <RiskCard 
-          title="Heavy Rain" 
+          title={t('risk.heavyRainRisk')} 
           value={data.heavyRainProb} 
           isPercentage 
           level={data.heavyRainProb > 50 ? 'HIGH' : data.heavyRainProb > 30 ? 'MEDIUM' : 'LOW'} 
           icon={CloudLightning} 
         />
         <RiskCard 
-          title="Sowing" 
-          value={data.sowingRisk} 
+          title={t('risk.sowingRisk')} 
+          value={data.sowingRisk === 'HIGH' ? t('risk.high') : data.sowingRisk === 'MEDIUM' ? t('risk.medium') : t('risk.low')} 
           level={data.sowingRisk} 
           icon={Sprout} 
         />
@@ -106,8 +108,8 @@ export const FarmerDashboard: React.FC = () => {
               <Sprout className="h-5 w-5" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-800">Crop Advisory</h3>
-              <p className="text-sm text-slate-500">Actionable guidance</p>
+              <h3 className="font-bold text-slate-800">{t('advisory.title')}</h3>
+              <p className="text-sm text-slate-500">{t('sowing.decisionSupport')}</p>
             </div>
           </div>
           <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-brand-500" />
@@ -118,8 +120,8 @@ export const FarmerDashboard: React.FC = () => {
               <CloudRain className="h-5 w-5" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-800">Rainfall Analysis</h3>
-              <p className="text-sm text-slate-500">Historical & trends</p>
+              <h3 className="font-bold text-slate-800">{t('rainfall.analysis')}</h3>
+              <p className="text-sm text-slate-500">{t('rainfall.historicalPattern')}</p>
             </div>
           </div>
           <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-brand-500" />
@@ -128,18 +130,18 @@ export const FarmerDashboard: React.FC = () => {
 
       {/* Sowing Window */}
       <div className={`border rounded-2xl p-6 shadow-sm ${data.sowingRisk === 'HIGH' ? 'bg-red-50 border-red-200' : 'bg-white border-slate-200'}`}>
-        <h2 className={`text-sm font-bold uppercase tracking-wider mb-4 ${data.sowingRisk === 'HIGH' ? 'text-red-700' : 'text-slate-500'}`}>Potential Sowing Window</h2>
+        <h2 className={`text-sm font-bold uppercase tracking-wider mb-4 ${data.sowingRisk === 'HIGH' ? 'text-red-700' : 'text-slate-500'}`}>{t('sowing.potentialSowingWindow')}</h2>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             {data.sowingRisk === 'HIGH' ? (
-              <div className="text-2xl font-bold text-red-600">Wait for stronger persistence</div>
+              <div className="text-2xl font-bold text-red-600">{t('sowing.waitForStrongerPersistence')}</div>
             ) : (
               <div className="text-2xl font-bold text-slate-900">18 June — 23 June</div>
             )}
             <div className="text-sm text-slate-500 mt-1">
               {data.sowingRisk === 'HIGH' 
-                ? "Current risk is too high for safe crop establishment."
-                : "Potential lower-risk window based on 7-day persistence forecast."}
+                ? t('sowing.reasonHigh')
+                : t('sowing.reasonLow')}
             </div>
           </div>
           
@@ -147,7 +149,7 @@ export const FarmerDashboard: React.FC = () => {
             to="/farmer/sowing"
             className="flex items-center justify-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-800 transition-colors whitespace-nowrap"
           >
-            Sowing Decision
+            {t('navigation.sowingDecision')}
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
@@ -155,12 +157,12 @@ export const FarmerDashboard: React.FC = () => {
 
       {/* Why it matters */}
       <div className="bg-slate-100 rounded-2xl p-6 border border-slate-200">
-        <h3 className="font-bold text-slate-800 mb-2">Why This Matters</h3>
+        <h3 className="font-bold text-slate-800 mb-2">{t('sowing.why')}</h3>
         <p className="text-slate-600 mb-4 text-sm leading-relaxed">
-          Initial rainfall does not automatically confirm sustained monsoon conditions. Sowing too early without persistence increases the risk of seed mortality during dry breaks.
+          {t('sowing.falseOnsetReason')}
         </p>
         <Link to="/farmer/sowing" className="text-sm font-semibold text-brand-600 hover:text-brand-700 flex items-center gap-1">
-          View Decision Reasoning <ArrowRight className="h-4 w-4" />
+          {t('common.viewDetails')} <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
 

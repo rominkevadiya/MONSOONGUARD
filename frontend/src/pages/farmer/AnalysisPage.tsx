@@ -3,9 +3,11 @@ import { useDemo } from '../../context/DemoContext';
 import { ArrowLeft, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Legend } from 'recharts';
+import { useLanguage } from '../../i18n';
 
 export const AnalysisPage: React.FC = () => {
   const { location } = useDemo();
+  const { t } = useLanguage();
   const [timeRange, setTimeRange] = useState('30days');
 
   // Synthetic demo data for charts
@@ -44,8 +46,8 @@ export const AnalysisPage: React.FC = () => {
             <ArrowLeft className="h-5 w-5 text-slate-600" />
           </Link>
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">Rainfall Analysis</h1>
-            <p className="text-slate-500">{location.name} • Trend Analytics</p>
+            <h1 className="text-2xl font-bold text-slate-900">{t('rainfall.analysis')}</h1>
+            <p className="text-slate-500">{location.name} • {t('rainfall.historicalPattern')}</p>
           </div>
         </div>
 
@@ -107,11 +109,11 @@ export const AnalysisPage: React.FC = () => {
                 <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b' }} domain={[0, 100]} />
                 <Tooltip 
                   contentStyle={{ borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-                  formatter={(value) => [`${value}%`]}
+                  formatter={(value: any) => [`${value}%`]}
                 />
                 <Legend iconType="circle" wrapperStyle={{ paddingTop: '20px', fontSize: '14px' }} />
-                <Area type="monotone" dataKey="onsetProb" name="Onset Prob." stroke="#22c55e" strokeWidth={3} fillOpacity={1} fill="url(#colorOnset)" />
-                <Area type="monotone" dataKey="persistenceProb" name="Persistence Prob." stroke="#f59e0b" strokeWidth={3} fillOpacity={1} fill="url(#colorPersistence)" />
+                <Area type="monotone" dataKey="onsetProb" name={t('risk.onsetProbability')} stroke="#22c55e" strokeWidth={3} fillOpacity={1} fill="url(#colorOnset)" />
+                <Area type="monotone" dataKey="persistenceProb" name={t('risk.persistenceProbability')} stroke="#f59e0b" strokeWidth={3} fillOpacity={1} fill="url(#colorPersistence)" />
               </AreaChart>
             </ResponsiveContainer>
           </div>

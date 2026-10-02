@@ -21,7 +21,7 @@ export const demoScenarios: DemoScenario[] = [
   },
   {
     id: 'false-onset',
-    name: 'False Onset (Dry Break)',
+    name: 'False Onset',
     data: {
       onsetProb: 82,
       persistenceProb: 35,
@@ -35,7 +35,7 @@ export const demoScenarios: DemoScenario[] = [
   },
   {
     id: 'heavy-rain',
-    name: 'Heavy Rain Risk',
+    name: 'Heavy Rain',
     data: {
       onsetProb: 95,
       persistenceProb: 90,
@@ -43,19 +43,6 @@ export const demoScenarios: DemoScenario[] = [
       drySpell14Prob: 10,
       heavyRainProb: 85,
       sowingRisk: 'HIGH',
-      falseOnset: false,
-    }
-  },
-  {
-    id: 'uncertain',
-    name: 'Uncertain Persistence',
-    data: {
-      onsetProb: 82,
-      persistenceProb: 61,
-      drySpell7Prob: 28,
-      drySpell14Prob: 21,
-      heavyRainProb: 18,
-      sowingRisk: 'MEDIUM',
       falseOnset: false,
     }
   }

@@ -190,6 +190,24 @@ export const OfficerDashboard: React.FC = () => {
               View Regional Analytics
             </Link>
           </div>
+
+          <div className="bg-slate-50 border border-slate-200 rounded-xl p-6 shadow-sm">
+            <h3 className="font-bold mb-4 text-slate-800">System Information</h3>
+            <div className="space-y-3 text-sm">
+              <div className="flex justify-between border-b border-slate-100 pb-2">
+                <span className="text-slate-500">Prediction Source</span>
+                <span className="font-medium text-slate-800">{isDemoMode ? 'Demo / Rule-Based' : 'ML Pipeline'}</span>
+              </div>
+              <div className="flex justify-between border-b border-slate-100 pb-2">
+                <span className="text-slate-500">ML Status</span>
+                <span className="font-medium text-emerald-600">Prototype Pipeline Available</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-slate-500">Dataset</span>
+                <span className="font-medium text-amber-600">Synthetic Smoke-Test Only</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

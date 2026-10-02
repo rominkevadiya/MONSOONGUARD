@@ -24,7 +24,7 @@ const DemoContext = createContext<DemoContextType | undefined>(undefined);
 export const DemoProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isDemoMode, setIsDemoMode] = useState(true);
   const [apiAvailable, setApiAvailable] = useState(false);
-  const [activeScenario, setActiveScenario] = useState<DemoScenario>(demoScenarios[3]); 
+  const [activeScenario, setActiveScenario] = useState<DemoScenario>(demoScenarios[1]);
   const [location, setLocation] = useState<LocationInfo>(demoLocations[0]);
   const [crop, setCrop] = useState<CropType>('Cotton');
   const [stage, setStage] = useState<GrowthStage>('Pre-sowing');
