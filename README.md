@@ -73,6 +73,47 @@ docker compose up --build
 
 ---
 
+## 💻 Manual Setup (Without Docker)
+
+If you prefer to run the services locally without Docker, follow these steps:
+
+### 1. Database Setup (PostgreSQL)
+Ensure you have PostgreSQL installed and running on your system.
+1. Create a database named `monsoonguard`.
+2. Execute the SQL scripts located in `database/schema.sql` and `database/seed.sql` to initialize the tables and populate the demo data.
+
+### 2. Backend Setup (FastAPI)
+Requires Python 3.11+.
+
+```bash
+cd backend
+
+# Create and activate a virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the backend server
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+### 3. Frontend Setup (React/Vite)
+Requires Node.js 18+.
+
+```bash
+cd frontend
+
+# Install dependencies
+npm install
+
+# Run the development server
+npm run dev
+```
+
+---
+
 ## 📂 Repository Structure
 
 ```
