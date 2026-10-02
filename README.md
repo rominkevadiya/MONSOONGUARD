@@ -54,25 +54,6 @@ For an in-depth understanding of the system's architecture, data models, and ML 
 
 ---
 
-## 🚀 Quick Start (Docker)
-
-The easiest way to run the entire stack locally is using Docker Compose.
-
-```bash
-# Clone the repository
-git clone https://github.com/rominkevadiya/MONSOONGUARD.git
-cd MONSOONGUARD
-
-# Build and start the containers
-docker compose up --build
-```
-
-- **Frontend (Farmer & Officer UI):** `http://localhost:5173`
-- **Backend API:** `http://localhost:8000`
-- **API Documentation (Swagger UI):** `http://localhost:8000/docs`
-
----
-
 ## 💻 Manual Setup (Without Docker)
 
 If you prefer to run the services locally without Docker, follow these steps:
@@ -111,6 +92,25 @@ npm install
 # Run the development server
 npm run dev
 ```
+
+---
+
+## 🚀 Quick Start (Docker)
+
+If you prefer using Docker, the easiest way to run the entire stack locally is using Docker Compose.
+
+```bash
+# Clone the repository
+git clone https://github.com/rominkevadiya/MONSOONGUARD.git
+cd MONSOONGUARD
+
+# Build and start the containers
+docker compose up --build
+```
+
+- **Frontend (Farmer & Officer UI):** `http://localhost:5173`
+- **Backend API:** `http://localhost:8000`
+- **API Documentation (Swagger UI):** `http://localhost:8000/docs`
 
 ---
 
